@@ -118,3 +118,6 @@ GitHub.sublime-settings
 
 */**/node_modules
 .DS_Store
+
+server/.idea
+server/messenger_backend/migrations

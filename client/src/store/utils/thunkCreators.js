@@ -5,6 +5,7 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
+  setReadReceipt,
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -91,6 +92,14 @@ const sendMessage = (data, body) => {
   });
 };
 
+const sendReadReceipt = (body) => {
+  socket.emit("update-read-receipt", {
+    convoId: body.convoId,
+    otherUser: body.otherUser.id,
+    timeStamp: body.timeStamp,
+  });
+};
+
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
@@ -115,5 +124,18 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
     dispatch(setSearchedUsers(data));
   } catch (error) {
     console.error(error);
+  }
+};
+
+// Update the read receipt time stamps
+// body format: {convoId, timeStamp, otherUser}
+export const updateReadTimeStamp = (body) => async (dispatch) => {
+  try {
+    await axios.put(`/api/conversations`, body);
+    dispatch(setReadReceipt(body.convoId, body.timeStamp));
+
+    sendReadReceipt(body);
+  } catch (err) {
+    console.log(err);
   }
 };

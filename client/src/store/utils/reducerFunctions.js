@@ -82,3 +82,22 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+// Add the updated timestamp to the store
+export const addTimeStampToStore = (state, payload) => {
+  const { convoId, timeStamp, otherUser } = payload;
+
+  return state.map((convo) => {
+    if (convo.id === convoId) {
+      if (otherUser) {
+        return {
+          ...convo,
+          otherUser: { ...convo.otherUser, lastRead: timeStamp },
+        };
+      }
+      return { ...convo, currentUserLastRead: timeStamp };
+    } else {
+      return convo;
+    }
+  });
+};

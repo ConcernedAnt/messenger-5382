@@ -36,3 +36,12 @@ def logout(sid, user_id):
     if user_id in online_users:
         online_users.remove(user_id)
     sio.emit("remove-offline-user", user_id, skip_sid=sid)
+
+
+@sio.on("update-read-receipt")
+def update_read_receipt(sid, message):
+    sio.emit(
+        "update-read-receipt",
+        {"convoId": message["convoId"], "timeStamp": message["timeStamp"], "otherUser": message["otherUser"]},
+        skip_sid=sid,
+    )
