@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+// Renders the number of unread messages in the sidebar
 const UnreadCounter = (props) => {
   const classes = useStyles();
   const { numUnread } = props;

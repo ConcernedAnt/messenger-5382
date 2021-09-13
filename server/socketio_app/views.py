@@ -42,6 +42,6 @@ def logout(sid, user_id):
 def update_read_receipt(sid, message):
     sio.emit(
         "update-read-receipt",
-        {"convoId": message["convoId"], "timeStamp": message["timeStamp"], "otherUser": message["otherUser"]},
+        {"convoId": message["convoId"], "timeStamp": message["timeStamp"], "otherUserId": message["otherUserId"]},
         skip_sid=sid,
     )

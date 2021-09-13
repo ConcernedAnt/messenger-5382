@@ -78,9 +78,8 @@ class Conversations(APIView):
             return HttpResponse(status=500)
 
     """
-    
+    Adds a timestamp for the current user to the conversation and returns the updated conversation
     """
-
     def put(self, request: Request):
         try:
             user = get_user(request)
@@ -104,5 +103,4 @@ class Conversations(APIView):
                 convo_json = convo.to_dict()
                 return JsonResponse({"conversation": convo_json})
         except Exception as e:
-            print(e)
             return HttpResponse(status=500)

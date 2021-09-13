@@ -29,7 +29,11 @@ const ActiveChat = (props) => {
   // Update the read messages timestamp when the chat is first opened or when a new message arrives
   useEffect(() => {
     if (props.conversation) {
-      updateReadTimeStamp(conversation.id, new Date(), conversation.otherUser);
+      updateReadTimeStamp(
+        conversation.id,
+        new Date(),
+        conversation.otherUser.id
+      );
     }
   }, [conversation.messages?.length]);
 
@@ -73,8 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateReadTimeStamp: (convoId, timeStamp, otherUser) => {
-      dispatch(updateReadTimeStamp({ convoId, timeStamp, otherUser }));
+    updateReadTimeStamp: (convoId, timeStamp, otherUserId) => {
+      dispatch(updateReadTimeStamp({ convoId, timeStamp, otherUserId }));
     },
   };
 };

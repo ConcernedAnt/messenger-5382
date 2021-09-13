@@ -25,7 +25,7 @@ socket.on("connect", () => {
 
   socket.on("update-read-receipt", (data) => {
     store.dispatch(
-      setReadReceipt(data.convoId, data.timeStamp, data.otherUser)
+      setReadReceipt(data.convoId, data.timeStamp, data.otherUserId)
     );
   });
 });

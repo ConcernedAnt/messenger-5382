@@ -95,7 +95,7 @@ const sendMessage = (data, body) => {
 const sendReadReceipt = (body) => {
   socket.emit("update-read-receipt", {
     convoId: body.convoId,
-    otherUser: body.otherUser.id,
+    otherUserId: body.otherUserId,
     timeStamp: body.timeStamp,
   });
 };
@@ -128,7 +128,7 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 };
 
 // Update the read receipt time stamps
-// body format: {convoId, timeStamp, otherUser}
+// body format: {convoId, timeStamp}
 export const updateReadTimeStamp = (body) => async (dispatch) => {
   try {
     await axios.put(`/api/conversations`, body);

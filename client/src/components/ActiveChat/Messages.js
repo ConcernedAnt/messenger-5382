@@ -12,7 +12,8 @@ const Messages = (props) => {
     .reverse()
     .find(
       (message) =>
-        message.senderId === userId && message.createdAt <= otherUser.lastRead
+        message.senderId === userId &&
+        message.createdAt <= otherUser.lastReadTimeStamp
     );
 
   return (

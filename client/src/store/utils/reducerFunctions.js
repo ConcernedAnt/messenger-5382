@@ -6,6 +6,7 @@ export const addMessageToStore = (state, payload) => {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
+      currentUserLastRead: null,
     };
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
@@ -85,14 +86,14 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 
 // Add the updated timestamp to the store
 export const addTimeStampToStore = (state, payload) => {
-  const { convoId, timeStamp, otherUser } = payload;
+  const { convoId, timeStamp, otherUserId } = payload;
 
   return state.map((convo) => {
     if (convo.id === convoId) {
-      if (otherUser) {
+      if (otherUserId) {
         return {
           ...convo,
-          otherUser: { ...convo.otherUser, lastRead: timeStamp },
+          otherUser: { ...convo.otherUser, lastReadTimeStamp: timeStamp },
         };
       }
       return { ...convo, currentUserLastRead: timeStamp };

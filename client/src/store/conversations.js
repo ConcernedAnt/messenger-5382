@@ -70,10 +70,10 @@ export const addConversation = (recipientId, newMessage) => {
 };
 
 // set the timestamp for the last read message
-export const setReadReceipt = (convoId, timeStamp, otherUser) => {
+export const setReadReceipt = (convoId, timeStamp, otherUserId) => {
   return {
     type: SET_READ_RECEIPT,
-    payload: { convoId, timeStamp, otherUser: otherUser || null },
+    payload: { convoId, timeStamp, otherUserId: otherUserId || null },
   };
 };
 

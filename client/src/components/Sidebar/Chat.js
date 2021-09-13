@@ -27,7 +27,8 @@ const Chat = (props) => {
   // Get the number of unread messages
   const numUnread = conversation.messages.filter(
     (message) =>
-      new Date(message.createdAt) > conversation.currentUserLastRead &&
+      new Date(message.createdAt) >
+        new Date(conversation.currentUserLastRead) &&
       message.senderId === otherUser.id
   ).length;
 
