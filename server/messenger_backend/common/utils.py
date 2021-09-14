@@ -39,8 +39,11 @@ def get_conversation_with_messages(convo_id):
 
 # Returns the number of unread messages in the conversation
 def get_num_unread_messages(current_user, current_user_timestamp, messages):
-    if not messages or not current_user_timestamp:
+    if not messages:
         return None
+
+    if not current_user_timestamp:
+        return len(messages)
 
     unread_messages = [message["id"] for message in messages if
                        message["createdAt"] > current_user_timestamp and message["senderId"] != current_user]

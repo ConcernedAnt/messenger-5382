@@ -3,18 +3,17 @@ import { Box, Typography } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginRight: 20,
     borderRadius: 10,
-    backgroundColor: "#3F92FF",
+    backgroundColor: theme.palette.primary.main,
   },
   text: {
     fontSize: 10,
-    color: "#FFFFFF",
+    color: theme.palette.otherUserText.main,
     letterSpacing: -0.5,
-    padding: "3px 7px",
-    fontWeight: "bold",
+    padding: theme.spacing(0.5, 1),
   },
 }));
 

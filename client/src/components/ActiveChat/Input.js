@@ -26,7 +26,7 @@ const Input = (props) => {
   const { postMessage, otherUser, conversationId, user, updateReadTimeStamp } =
     props;
 
-  // Update the read messages timestamp when the chat is first opened or when a new message arrives
+  // Update the read messages timestamp when the chat is first opened
   useEffect(() => {
     updateReadTimeStamp(conversationId, new Date(), otherUser.id);
   }, [conversationId]);

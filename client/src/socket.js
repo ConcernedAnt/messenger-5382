@@ -24,6 +24,7 @@ socket.on("connect", () => {
 
   socket.on("new-message", (data) => {
     const { activeConversation } = store.getState();
+    // Info about the recipient of the message
     const { username, userId } = data.recipientInfo;
 
     const payload = {
@@ -32,15 +33,16 @@ socket.on("connect", () => {
       otherUserId: userId,
     };
 
+    // Updates the timestamps if the conversation is already open
     if (activeConversation === username) {
       store.dispatch(updateReadTimeStamp(payload));
     }
 
+    store.dispatch(setNewMessage(data.message, data.sender));
+
     store.dispatch(
       setUnreadMessages(data.message.conversationId, data.numUnreadMessages)
     );
-
-    store.dispatch(setNewMessage(data.message, data.sender));
   });
 
   socket.on("update-read-receipt", (data) => {

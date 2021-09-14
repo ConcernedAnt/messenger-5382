@@ -79,12 +79,14 @@ export const setReadReceipt = (convoId, lastRead) => {
   };
 };
 
+// Sets the number of unread messages
 export const setUnreadMessages = (convoId, numUnreadMessages) => {
   return {
     type: SET_UNREAD_MESSAGES,
     payload: { convoId, numUnreadMessages },
   };
 };
+
 // REDUCER
 
 const reducer = (state = [], action) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography, Avatar } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
   avatar: {
     height: 20,
     width: 20,
-    marginTop: 9.5,
+    marginTop: theme.spacing(1),
   },
 }));
 

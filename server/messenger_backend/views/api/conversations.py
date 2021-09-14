@@ -103,6 +103,9 @@ class Conversations(APIView):
             if conversation_id:
                 convo = get_conversation_with_messages(conversation_id)
 
+                if user.id not in (convo.user1.id, convo.user2.id):
+                    return HttpResponse(status=403)
+
                 if convo.user1 and convo.user1.id == user.id:
                     convo.user1TimeStamp = time_stamp
                 elif convo.user2 and convo.user2.id == user.id:

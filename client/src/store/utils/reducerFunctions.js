@@ -6,7 +6,6 @@ export const addMessageToStore = (state, payload) => {
       id: message.conversationId,
       otherUser: sender,
       messages: [message],
-      currentUserLastRead: null,
     };
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
@@ -84,7 +83,7 @@ export const addNewConvoToStore = (state, recipientId, message) => {
   });
 };
 
-// Add the updated timestamp to the store
+// Add the updated timestamp (last read message) to the store
 export const addTimeStampToStore = (state, payload) => {
   const { convoId, lastRead } = payload;
 
@@ -100,6 +99,7 @@ export const addTimeStampToStore = (state, payload) => {
   });
 };
 
+// Adds the updated number of unread messages to the store
 export const addUnreadMessagesToStore = (state, payload) => {
   const { convoId, numUnreadMessages } = payload;
 

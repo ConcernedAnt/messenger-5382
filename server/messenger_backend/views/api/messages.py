@@ -56,6 +56,6 @@ class Messages(APIView):
             message = Message(senderId=sender_id, text=text, conversation=conversation)
             message.save()
             message_json = message.to_dict()
-            return JsonResponse({"message": message_json, "sender": sender})
+            return JsonResponse({"message": message_json, "sender": sender, "numUnreadMessages": 1})
         except Exception as e:
             return HttpResponse(status=500)
