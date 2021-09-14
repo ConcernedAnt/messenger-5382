@@ -24,14 +24,6 @@ const Chat = (props) => {
   const { conversation } = props;
   const { otherUser } = conversation;
 
-  // Get the number of unread messages
-  const numUnread = conversation.messages.filter(
-    (message) =>
-      new Date(message.createdAt) >
-        new Date(conversation.currentUserLastRead) &&
-      message.senderId === otherUser.id
-  ).length;
-
   const handleClick = async (conversation) => {
     await props.setActiveChat(conversation.otherUser.username);
   };
@@ -45,7 +37,9 @@ const Chat = (props) => {
         sidebar={true}
       />
       <ChatContent conversation={conversation} />
-      {numUnread >= 1 && <UnreadCounter numUnread={numUnread} />}
+      {conversation.numUnreadMessages >= 1 && (
+        <UnreadCounter numUnread={conversation.numUnreadMessages} />
+      )}
     </Box>
   );
 };

@@ -26,11 +26,12 @@ def go_online(sid, user_id):
 @sio.on("new-message")
 def new_message(sid, message):
     user = User.get_by_id(message["message"]["senderId"])
-    timestamp_info = {"username": user.username, "userId": user.id}
+    recipientInfo = {"username": user.username, "userId": user.id}
 
     sio.emit(
         "new-message",
-        {"message": message["message"], "sender": message["sender"], "timeStampInfo": timestamp_info},
+        {"message": message["message"], "sender": message["sender"], "recipientInfo": recipientInfo,
+         "numUnreadMessages": message["numUnreadMessages"]},
         skip_sid=sid,
     )
 
@@ -46,6 +47,6 @@ def logout(sid, user_id):
 def update_read_receipt(sid, message):
     sio.emit(
         "update-read-receipt",
-        {"convoId": message["convoId"], "timeStamp": message["timeStamp"], "otherUserId": message["otherUserId"]},
+        {"convoId": message["convoId"], "lastRead": message["lastRead"], },
         skip_sid=sid,
     )

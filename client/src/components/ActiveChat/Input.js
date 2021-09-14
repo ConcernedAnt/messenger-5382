@@ -29,7 +29,7 @@ const Input = (props) => {
   // Update the read messages timestamp when the chat is first opened or when a new message arrives
   useEffect(() => {
     updateReadTimeStamp(conversationId, new Date(), otherUser.id);
-  }, []);
+  }, [conversationId]);
 
   const handleChange = (event) => {
     setText(event.target.value);

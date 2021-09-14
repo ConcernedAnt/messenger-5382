@@ -5,6 +5,7 @@ import {
   removeOfflineUser,
   addOnlineUser,
   setReadReceipt,
+  setUnreadMessages,
 } from "./store/conversations";
 import { updateReadTimeStamp } from "./store/utils/thunkCreators";
 
@@ -20,9 +21,11 @@ socket.on("connect", () => {
   socket.on("remove-offline-user", (id) => {
     store.dispatch(removeOfflineUser(id));
   });
+
   socket.on("new-message", (data) => {
     const { activeConversation } = store.getState();
-    const { username, userId } = data.timeStampInfo;
+    const { username, userId } = data.recipientInfo;
+
     const payload = {
       convoId: data.message.conversationId,
       timeStamp: new Date(),
@@ -33,14 +36,15 @@ socket.on("connect", () => {
       store.dispatch(updateReadTimeStamp(payload));
     }
 
+    store.dispatch(
+      setUnreadMessages(data.message.conversationId, data.numUnreadMessages)
+    );
+
     store.dispatch(setNewMessage(data.message, data.sender));
   });
 
   socket.on("update-read-receipt", (data) => {
-    console.log(data);
-    store.dispatch(
-      setReadReceipt(data.convoId, data.timeStamp, data.otherUserId)
-    );
+    store.dispatch(setReadReceipt(data.convoId, data.lastRead));
   });
 });
 

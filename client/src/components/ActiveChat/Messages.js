@@ -6,22 +6,12 @@ import moment from "moment";
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
 
-  // Gets the last message read by the other user
-  const lastReadMessage = messages
-    .slice()
-    .reverse()
-    .find(
-      (message) =>
-        message.senderId === userId &&
-        new Date(message.createdAt) <= new Date(otherUser.lastRead)
-    );
-
   return (
     <Box>
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
-        const isLastMessageRead = message.id === lastReadMessage?.id;
+        const isLastMessageRead = message.id === otherUser.lastRead;
 
         return message.senderId === userId ? (
           <SenderBubble
