@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
 import { connect } from "react-redux";
-import { updateReadTimeStamp } from "../../store/utils/thunkCreators";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,19 +22,8 @@ const useStyles = makeStyles(() => ({
 
 const ActiveChat = (props) => {
   const classes = useStyles();
-  const { user, updateReadTimeStamp } = props;
+  const { user } = props;
   const conversation = props.conversation || {};
-
-  // Update the read messages timestamp when the chat is first opened or when a new message arrives
-  useEffect(() => {
-    if (props.conversation) {
-      updateReadTimeStamp(
-        conversation.id,
-        new Date(),
-        conversation.otherUser.id
-      );
-    }
-  }, [conversation.messages?.length]);
 
   return (
     <Box className={classes.root}>
@@ -75,12 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateReadTimeStamp: (convoId, timeStamp, otherUserId) => {
-      dispatch(updateReadTimeStamp({ convoId, timeStamp, otherUserId }));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveChat);
+export default connect(mapStateToProps, null)(ActiveChat);

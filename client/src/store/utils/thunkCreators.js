@@ -128,7 +128,7 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 };
 
 // Update the read receipt time stamps
-// body format: {convoId, timeStamp}
+// body format: {convoId, timeStamp, otherUserId}
 export const updateReadTimeStamp = (body) => async (dispatch) => {
   try {
     await axios.put(`/api/conversations`, body);

@@ -102,5 +102,6 @@ class Conversations(APIView):
 
                 convo_json = convo.to_dict()
                 return JsonResponse({"conversation": convo_json})
+            return HttpResponse(status=400)
         except Exception as e:
             return HttpResponse(status=500)

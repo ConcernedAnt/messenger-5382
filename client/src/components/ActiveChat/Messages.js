@@ -13,7 +13,7 @@ const Messages = (props) => {
     .find(
       (message) =>
         message.senderId === userId &&
-        message.createdAt <= otherUser.lastReadTimeStamp
+        new Date(message.createdAt) <= new Date(otherUser.lastRead)
     );
 
   return (
