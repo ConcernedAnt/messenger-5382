@@ -36,7 +36,10 @@ const Chat = (props) => {
         online={otherUser.online}
         sidebar={true}
       />
-      <ChatContent conversation={conversation} />
+      <ChatContent
+        conversation={conversation}
+        isUnread={conversation.numUnreadMessages >= 1}
+      />
       {conversation.numUnreadMessages >= 1 && (
         <UnreadCounter numUnread={conversation.numUnreadMessages} />
       )}
