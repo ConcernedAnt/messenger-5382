@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Q
-
+from django.utils import timezone
 from . import utils
 from .user import User
 
@@ -15,8 +15,8 @@ class Conversation(utils.CustomModel):
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
-    user1TimeStamp = models.DateTimeField(auto_now=True)
-    user2TimeStamp = models.DateTimeField(blank=True, null=True)
+    user1TimeStamp = models.DateTimeField(blank=True, default=timezone.now)
+    user2TimeStamp = models.DateTimeField(blank=True,default=timezone.now)
 
     # find conversation given two user Ids
     def find_conversation(user1Id, user2Id):
