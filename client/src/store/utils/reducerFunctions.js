@@ -82,3 +82,35 @@ export const addNewConvoToStore = (state, recipientId, message) => {
     }
   });
 };
+
+// Add the updated timestamp (last read message) to the store
+export const addTimeStampToStore = (state, payload) => {
+  const { convoId, lastRead } = payload;
+
+  return state.map((convo) => {
+    if (convo.id === convoId) {
+      return {
+        ...convo,
+        otherUser: { ...convo.otherUser, lastRead: lastRead },
+      };
+    } else {
+      return convo;
+    }
+  });
+};
+
+// Adds the updated number of unread messages to the store
+export const addUnreadMessagesToStore = (state, payload) => {
+  const { convoId, numUnreadMessages } = payload;
+
+  return state.map((convo) => {
+    if (convo.id === convoId) {
+      return {
+        ...convo,
+        numUnreadMessages: numUnreadMessages,
+      };
+    } else {
+      return convo;
+    }
+  });
+};

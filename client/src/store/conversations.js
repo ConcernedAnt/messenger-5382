@@ -4,6 +4,8 @@ import {
   addSearchedUsersToStore,
   removeOfflineUserFromStore,
   addMessageToStore,
+  addTimeStampToStore,
+  addUnreadMessagesToStore,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -15,6 +17,8 @@ const REMOVE_OFFLINE_USER = "REMOVE_OFFLINE_USER";
 const SET_SEARCHED_USERS = "SET_SEARCHED_USERS";
 const CLEAR_SEARCHED_USERS = "CLEAR_SEARCHED_USERS";
 const ADD_CONVERSATION = "ADD_CONVERSATION";
+const SET_READ_RECEIPT = "SET_READ_RECEIPT";
+const SET_UNREAD_MESSAGES = "SET_UNREAD_MESSAGES";
 
 // ACTION CREATORS
 
@@ -67,6 +71,22 @@ export const addConversation = (recipientId, newMessage) => {
   };
 };
 
+// set the timestamp for the last read message
+export const setReadReceipt = (convoId, lastRead) => {
+  return {
+    type: SET_READ_RECEIPT,
+    payload: { convoId, lastRead },
+  };
+};
+
+// Sets the number of unread messages
+export const setUnreadMessages = (convoId, numUnreadMessages) => {
+  return {
+    type: SET_UNREAD_MESSAGES,
+    payload: { convoId, numUnreadMessages },
+  };
+};
+
 // REDUCER
 
 const reducer = (state = [], action) => {
@@ -91,6 +111,10 @@ const reducer = (state = [], action) => {
         action.payload.recipientId,
         action.payload.newMessage
       );
+    case SET_READ_RECEIPT:
+      return addTimeStampToStore(state, action.payload);
+    case SET_UNREAD_MESSAGES:
+      return addUnreadMessagesToStore(state, action.payload);
     default:
       return state;
   }

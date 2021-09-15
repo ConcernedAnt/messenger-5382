@@ -15,24 +15,26 @@ const useStyles = makeStyles((theme) => ({
   },
   previewText: {
     fontSize: 12,
-    color: "#9CADC8",
-    letterSpacing: -0.17,
   },
 }));
 
 const ChatContent = (props) => {
   const classes = useStyles();
 
-  const { conversation } = props;
+  const { conversation, isUnread } = props;
   const { latestMessageText, otherUser } = conversation;
 
+  const latestMessageVariant = isUnread ? "subtitle2" : " ";
   return (
     <Box className={classes.root}>
       <Box>
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>
-        <Typography className={classes.previewText}>
+        <Typography
+          className={classes.previewText}
+          variant={latestMessageVariant}
+        >
           {latestMessageText}
         </Typography>
       </Box>

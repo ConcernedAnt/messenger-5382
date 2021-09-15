@@ -108,13 +108,15 @@ Control.system-ca-bundle
 GitHub.sublime-settings 
 
 # Visual Studio Code # 
-.vscode/* 
-!.vscode/settings.json 
-!.vscode/tasks.json 
-!.vscode/launch.json 
-!.vscode/extensions.json 
 .history
 
 
 */**/node_modules
 .DS_Store
+
+server/.idea
+server/messenger_backend/migrations
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
